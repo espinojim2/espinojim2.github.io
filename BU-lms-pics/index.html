@@ -5,7 +5,7 @@ function loadImages(){
 //{
 x=0;
 setInterval(function(){
-document.write("<img src='http://lms.bicol-u.edu.ph/pluginfile.php/"+x+"/user/icon/rocket/f5?rev=1'/>");    
+document.write("<img src='http://lms.bicol-u.edu.ph/pluginfile.php/"+x+"/user/icon/rocket/f5?rev=1' onerror='this.parentNode.removeChild(this);'/>");    
 x++;
 },200);
 
