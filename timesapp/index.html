@@ -1,0 +1,188 @@
+<html manifest="cache.manifest">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="sweetalert.css"/>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="sweetalert.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+setDefaultOptions();
+});
+
+function computetime(){
+var h1=parseInt($('#hour1').val());
+var m1=parseInt($('#min1').val());
+
+var h2=parseInt($('#hour2').val());	
+var m2=parseInt($('#min2').val());
+var msg="";
+if(h1==0){ msg="Beginning Hour should not be equal to zero"; }
+else if(h2==0){ msg="Ending Hour should not be equal to zero"; }
+//else if(h1 > h2){ msg="Beginning hour should be less than Ending hour"; }
+else if(h1==h2){ 
+	
+	msg="Remember this is military time";
+//msg="Dangag! Military time Bes";
+}
+
+
+
+
+
+
+if(msg==""){
+var timetot=totaltime(h1,m1,h2,m2);
+
+
+swal({   
+  title: "Well Done my friend!",   
+  text: timetot,   
+  html: true,
+  closeOnConfirm: false
+ });  
+
+
+
+
+
+
+
+$('#time').html(timetot);
+
+}
+else{
+	swal("Error",msg,"error");
+}
+
+
+}
+
+
+function reset1(){
+
+$('#hour1').val("1");
+$('#min1').val("0");
+
+$('#hour2').val("1");	
+$('#min2').val("0");
+
+}
+
+ function totaltime(hr1,min1,hr2,min2){
+var total=0;
+var a; var b;
+a=(parseInt(hr1)*60)+parseInt(min1);
+b=(parseInt(hr2)*60)+parseInt(min2);
+
+if(a>b){
+var hours=(24+Math.round((b-a)/60))
+
+if(min1>min2){
+var minutes=60+(Math.round(((b-a)%60)))
+}
+else if(min1<min2){
+var minutes=60+(Math.round(((b-a)%60)))	
+}
+else{
+var minutes=(Math.round(((b-a)%60)))	
+}
+
+}
+else{
+
+
+var hours=Math.round(         ((b-a)/60).toFixed(2)            );
+var minutes=Math.round(((b-a)%60));
+}
+
+
+
+var zero1=(hours<10)?"0":"";	
+var zero2=(minutes<10)?"0":"";	
+
+return "The result from your computation is <h3>"+zero1+""+(hours)+":"+zero2+""+minutes+"</h3> <br>this means <b>"+hours+" hours and "+minutes+" minutes</b>.";
+}
+
+
+
+function setCouterOptions(strt,end){
+str="";
+for(var x=strt; x<=end ;x++){
+var zero=(x<10)?"0":"";	
+str+="<option value='"+x+"'>"+zero+""+x+"</option>";	
+}	
+return str;
+}
+
+
+
+function setDefaultOptions(){
+$('#hour1').html(setCouterOptions(1,24));
+$('#hour2').html(setCouterOptions(1,24));
+$('#min1').html(setCouterOptions(0,59));
+$('#min2').html(setCouterOptions(0,59));
+}
+
+
+
+</script>
+<body>
+<div style='width:100%; height:70px; background:#337ab7; top:0; left:0; position:fixed; z-index:9;'><center><h2 style='color:#fff; font-family:Roboto;'><span class='glyphicon glyphicon-time'></span>times-app</h2></center></div>	
+
+<div style='padding:30px; margin-top:70px;'>
+
+<div class='alert alert-warning'><span class='text-warning'></span>This is military time app</div>
+<div class='row' style='padding:10px; border:solid 1px rgba(0,0,0,0.2); margin-bottom:2%;' >
+
+<h5>Beginning Time</h5>
+<div class='col-sm-6 col-xs-6'>
+<label>Hour</label>
+
+<select class='form-control' style='width:100%;'  id='hour1'>
+
+</select>
+</div>
+<div class='col-xs-6 col-sm-6' >
+<label>Minute</label>
+<select class='form-control' style='width:100%;'  id='min1' ></select>
+</div>
+
+</div>
+
+<h5>Ending Time</h5>
+<div class='row' style='padding:10px; border:solid 1px rgba(0,0,0,0.2); margin-bottom:2%;'>
+<div class='col-xs-6 col-sm-6'>
+<label>Hour</label>
+<select class='form-control' style='width:100%;'  id='hour2'>
+</select><br>
+</div>
+<div class='col-xs-6 col-sm-6'>
+<label>Minute</label>
+<select class='form-control' style='width:100%;'  id='min2' ></select>
+</div>
+</div>
+
+<div class='row' style='padding:10px;'>
+
+<div class='col-sm-6 col-xs-6'>
+<button class='btn btn-cancel' style='width:100%; padding:3%; color:#337ab7;'  onclick='reset1()'><b>Reset</b></button>
+
+</div>
+
+<div class='col-sm-6 col-xs-6'>
+<button class='btn btn-primary' style='width:100%; padding:3%; ' onclick='computetime()'><b>Compute</b></button>
+
+</div>
+
+</div>
+
+<br><br>
+<label>Current Result: </label>
+<div id='time'>No Results Yet</div>
+</div>
+<br><br>
+<div style='width:100%; font-size:13px; color:rgba(0,0,0,0.4);'><center><b>&copy; copyright 2016 powered by <i>jse tech</i></b></center></div>
+</body>
+</html>
