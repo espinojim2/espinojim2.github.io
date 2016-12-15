@@ -1,0 +1,184 @@
+<html manifest="cache.manifest" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="sweetalert.css"/>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="sweetalert.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	memberopts();
+	setCont(1);
+});
+
+
+
+
+function memberopts(){
+var opt="";
+for(var x=1;x<10;x++){
+opt+="<option value='"+x+"'>"+x+" member/s</option>";
+}	
+$('#memberopts').html(opt);
+}
+
+
+
+function setCont(n){
+$('.setcont').hide();
+$('#setcont'+n).show();
+}
+
+
+
+function calculateResult(){
+setCont(2);	
+var members=$('#memberopts').val();
+var type=$('#typeopts').val();
+var n={};
+n.internet=50;
+n.analysis=150;
+n.construction=100;
+n.stat=100;
+n.research=150;
+n.type=type;
+var str="";
+var total=0;
+str+="<table class='table table-bordered' style='margin-top:3%;'>";
+str+="<tr>";
+str+="<td><b>Miscellaneous</b></td>";
+str+="<td>Php "+n.internet+".00</td>";
+str+="</tr>";
+
+total+=parseInt(n.internet);
+
+str+="<tr>";
+str+="<td><b>Analysis</b></td>";
+str+="<td>Php "+n.analysis+".00</td>";
+str+="</tr>";
+total+=parseInt(n.analysis);
+
+str+="<tr>";
+str+="<td><b>Research</b></td>";
+str+="<td> Php"+n.research+".00</td>";
+str+="</tr>";
+total+=parseInt(n.research);
+
+str+="<tr>";
+str+="<td><b>Status(Rush project)</b></td>";
+str+="<td> + Php "+n.stat+".00</td>";
+str+="</tr>";
+
+total+=parseInt(n.stat);
+
+if(type==50){
+str+="<tr>";
+str+="<td><b>Type (Student)</b></td>";
+str+="<td> Php "+n.type+".00</td>";
+str+="</tr>";
+
+total+=parseInt(n.type);
+
+}
+else{
+str+="<tr>";
+str+="<td><b>(Non Student) Fee</b></td>";
+str+="<td> Php "+n.type+".00</td>";
+str+="</tr>";	
+total+=parseInt(n.type);
+}
+
+str+="<tr>";
+str+="<td><b>No. of Member/s</b></td>";
+str+="<td> X "+members+" (member/s)</td>";
+str+="</tr>";
+
+
+var ttotal=total*members;
+
+
+str+="<tr>";
+str+="<td><b>Total Payment</b></td>";
+str+="<td><b>Php "+ttotal+".00</b></td>";
+str+="</tr>";
+
+
+
+str+="</table>";
+
+$('#result').html(str);
+}
+
+
+</script>
+<body>
+<div style='width:100%; height:70px; background:#337ab7; top:0; left:0; position:fixed; z-index:9;'><center><h2 style='color:#fff; font-family:Roboto;'><span class='glyphicon glyphicon-time'></span>FS Calulator</h2></center></div>	
+
+<div style='padding:30px; margin-top:70px;'>
+
+<div class='container'>
+
+<div class='setcont' id='setcont1'>
+<div class='row'>
+<div class='col-sm-12'>
+
+<div class='alert alert-success'> The calculator is in "Rush project" mode</div>
+
+</div>
+</div>
+
+<div class='row'>
+<div class='col-sm-3'><label>How many members?</label></div>
+<div class='col-sm-9'>
+	<select class='form-control' id='memberopts'></select>
+</div>
+</div>
+
+
+<div class='row' style='margin-top:3%;'>
+<div class='col-sm-3'><label>Type</label></div>
+<div class='col-sm-9'>
+	<select class='form-control' id='typeopts'>
+		<option value='50'>Student</option>
+		<option value='100'>Non student</option>
+	</select>
+</div>
+</div>
+
+
+
+
+
+<div class='row' style='margin-top:3%;'>
+<div class='col-sm-3'></div>
+<div class='col-sm-9'>
+<button class='btn btn-primary btn-lg' onclick='calculateResult()'><span class='glyphicon glyphicon-transfer'></span> Calculate Payment</button>
+</div>
+</div>
+
+<hr>
+</div>
+
+
+
+<div class='setcont' id='setcont2'>
+<div class='row' style='margin-top:3%;'>
+<div class='col-sm-12'>
+<button class='btn btn-default' onclick='setCont(1)'>Back</button>
+<div id='result'></div>
+</div>
+</div>
+</div>
+
+
+
+
+
+</div>
+
+</div>
+<br><br>
+<div style='width:100%; font-size:13px; color:rgba(0,0,0,0.4);'><center><b>&copy; copyright 2016 powered by <i>jse tech</i></b></center></div>
+</body>
+</html>
