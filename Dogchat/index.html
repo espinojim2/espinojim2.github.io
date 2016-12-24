@@ -12,12 +12,13 @@ $(document).ready(function(){
 });
 
 function sendMessage(){
-var message=$('#message').val();
-
+var message=c.val();
+$('#btn').prop("disabled",true);
 //$.post("https://gagachat.herokuapp.com/gaga_api.php?message="+message).done(function(data){
 //alert(data);
 //});
 $('#message').val("");
+  $('#message').focus();     
 $('#msg').html("<div class='alert alert-success'>You: <b>"+message+"</b></div>");
 $('#msg1').html("<div class='alert alert-warning'><b>...<b></div>");
 $.ajax({
@@ -29,7 +30,7 @@ $.ajax({
     {
          speak(data.reply);
     	$('#msg1').html("<div class='alert alert-warning'>Dog: <b>"+data.reply+"</b></div>");
-        
+        $('#btn').prop("disabled",false);
 
     }
 }).fail(function() {
@@ -90,7 +91,7 @@ function speak(text, callback) {
 
 <div class='row'>
 <div class='col-sm-12' align='right'>
-<button class='btn btn-primary btn-lg' onclick='sendMessage()'><span class='glyphicon glyphicon-send' ></span> Send</button>
+<button class='btn btn-primary btn-lg' id='btn' onclick='sendMessage()'><span class='glyphicon glyphicon-send' ></span> Send</button>
 </div>
 </div>
 
