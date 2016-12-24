@@ -1,0 +1,107 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="sweetalert.css"/>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="sweetalert.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+       
+});
+
+function sendMessage(){
+var message=$('#message').val();
+
+//$.post("https://gagachat.herokuapp.com/gaga_api.php?message="+message).done(function(data){
+//alert(data);
+//});
+$('#message').val("");
+$('#msg').html("<div class='alert alert-success'>You: <b>"+message+"</b></div>");
+$('#msg1').html("<div class='alert alert-warning'><b>...<b></div>");
+$.ajax({
+    url: "https://gagachat.herokuapp.com/gaga_api.php?message="+message,
+    //url:"http://localhost/chatterbot/gaga_api.php?message="+message,
+    dataType: "jsonp",
+    contentType: "application/json; charset=utf-8",
+    success: function(data)
+    {
+         speak(data.reply);
+    	$('#msg1').html("<div class='alert alert-warning'>Dog: <b>"+data.reply+"</b></div>");
+        
+
+    }
+}).fail(function() {
+   $('#msg1').html("<div class='alert alert-warning'>Dog: <b>Connect to the internet</b></div>");
+  });
+
+}
+
+
+function speak(text, callback) {
+    var u = new SpeechSynthesisUtterance();
+    u.text = text;
+    u.lang = 'en-UK';
+ 
+    u.onend = function () {
+        if (callback) {
+            callback();
+        }
+    };
+ 
+    u.onerror = function (e) {
+        if (callback) {
+            callback(e);
+        }
+    };
+ 
+    speechSynthesis.speak(u);
+
+}
+
+
+</script>
+<body>
+<div style='width:100%; height:70px; background:#337ab7; top:0; left:0; position:fixed; z-index:9;'><center><h2 style='color:#fff; font-family:Roboto;'><span class='glyphicon glyphicon-time'></span>DOGchat</h2></center></div>	
+
+
+<div style='padding:30px; margin-top:70px;'>
+
+<div class='container'>
+
+
+<div class='row' align='center' >
+<img src="dog.gif" style='width:200px; margin-bottom:2%;'>
+</div>
+
+<div class='row' id='msg' style='margin-bottom:2%;'></div>
+<div class='row' id='msg1' style='margin-bottom:2%;'></div>
+<div class='row' style='margin-bottom:2%;'>
+<div class='col-sm-12'>
+
+<textarea id='message' class='form-control'></textarea>
+</div>
+</div>
+
+
+
+
+
+<div class='row'>
+<div class='col-sm-12' align='right'>
+<button class='btn btn-primary btn-lg' onclick='sendMessage()'><span class='glyphicon glyphicon-send' ></span> Send</button>
+</div>
+</div>
+
+
+
+
+</div>
+
+
+</div>
+<br><br>
+<div style='width:100%; font-size:13px; color:rgba(0,0,0,0.4);'><center><b>&copy; copyright 2016 powered by <i>jse tech</i></b></center></div>
+</body>
+</html>
