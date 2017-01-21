@@ -1,0 +1,62 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+
+<dom-module id="my-account">
+  <template>
+
+
+ <div style='padding:2%;'>
+
+
+
+         
+
+<div id='msg1'></div>
+<div style='padding:3%; margin:3%;' align='center'>
+<div id='loginbody' style=''>
+<div style='margin-bottom:2%;'>
+<h2>Update account</h2>
+</div>
+<div>
+<hr>
+
+</div>
+<input type='hidden' id='my_accountid' value=''>
+<div style='margin-bottom:2%;'>
+  <label>Username</label>
+  <input type='text' id='username1' style='padding:2%; font-size:13px;'>
+</div>
+
+<div style='margin-bottom:2%;'>
+  <label>Password</label>
+  <input type='password' id='password1' style='padding:2%; font-size:13px;'>
+</div>
+
+<div>
+<button style='padding:2%; font-size:13px;' onclick='app_updateAccount()'>Update</button>
+</div>
+</div>
+
+</div>
+
+              </div>
+
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'my-account'
+      });
+    })();
+  </script>
+  <script type="text/javascript">
+$(document).ready(function(){
+setTimeout(function(){ setMyUserPass(); },2000);
+});
+  </script>
+</dom-module>

@@ -1,0 +1,60 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+
+<dom-module id="my-container">
+  <template>
+
+
+ <div style='padding:2%;'>
+
+                <div class='msetcont' id='setcont1' style='display:none;'>
+                  <h3>Tasks</h3>
+                <hr/>
+                <button onclick='addTask()' style='background:#fff; border:solid 1px; padding:3%;' title='Add new task'> <iron-icon icon="add"></iron-icon></button>
+
+                <div style='margin-top:5%;'>
+                  <div id='taskscont1' >
+                    <h3>No Tasks Found</h3>
+                  </div>
+
+                </div>
+
+                </div>
+                <div class='msetcont' id='setcont2' style='display:none;'>
+                  <div>
+                    <h3>Add new Task</h3>
+                    
+                    <hr>
+                    <div style='margin-top:2%;'>
+                      <textarea id='js_texttodo' placeholder='Type your task here ...' style='font-size:15px; padding:1%; width:100%;'></textarea></div>
+                    <div style='margin-top:2%;'>
+                         <button class='btn' onclick='pm_back()' style='padding:2%; background:#fff; border:solid 1px rgba(0,0,0,0.4);'> <iron-icon icon="refresh"></iron-icon> Cancel</button>
+
+                      <button onclick='pm_saveTask()' class='btn' style='padding:2%; background:#fff; border:solid 1px rgba(0,0,0,0.4);'> <iron-icon icon="save"></iron-icon> Save</button>
+
+
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+
+
+              </div>
+
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'my-container'
+
+      });
+    })();
+  </script>
+</dom-module>

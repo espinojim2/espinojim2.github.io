@@ -1,0 +1,49 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+
+<dom-module id="app-about">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      span,
+      input {
+        @apply(--paper-font-body2);
+      }
+    </style>
+
+    <h2>Greetings! from TodoThis</h2>
+    <div style='margin-top:3%;'>
+      <center><img style='margin-left:50px; height:130px;' src="data:image/jpeg;base64,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"/></center>
+
+    </div>
+    <div style='margin-top:2%;'>
+<p>TodoThis is an application that allows the user to implement the classic task list approach wherein the user shall have the capability to record all tasks and one by one 
+can be erased. This web app does 3 things, first is adding a task, second is deleting a task and lastly is provides a restoration feature that allows the user to reuse tasks.
+</p>
+    </div>
+
+
+    <div style='margin-top:2%;'>
+<p>TodoThis aims to provide the good user experience equiped with simplicity of the product.
+</p>
+    </div>
+
+
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'app-about'
+
+      });
+    })();
+  </script>
+</dom-module>

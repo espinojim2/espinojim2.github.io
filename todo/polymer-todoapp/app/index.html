@@ -1,0 +1,274 @@
+-<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Polymer Starter Kit">
+  <title>TodoThis</title>
+
+  <!-- Place favicon.ico in the `app/` directory -->
+
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#2E3AA1">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Tile color for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="PSK">
+  <link rel="icon" sizes="192x192" href="images/touch/apple-touch-icon.png">
+<link rel="shortcut icon" href="images/touch/apple-touch-icon.png"></link>
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild-->
+
+ <script src="jquery.min.js"></script>
+
+ <script type='text/javascript' src="scripts/todolistapp.js"></script>
+
+
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- endbuild -->
+
+  <!-- Because this project uses vulcanize this should be your only html import
+       in this file. All other imports should go in elements.html -->
+  <link rel="import" href="elements/elements.html">
+
+  <!-- For shared styles, shared-styles.html import in elements.html -->
+  <style is="custom-style" include="shared-styles"></style>
+</head>
+
+<body style='background:#fff;' unresolved >
+  <!-- build:remove -->
+  <span id="browser-sync-binding"></span>
+  <!-- endbuild -->
+
+  <template is="dom-bind" id="app">
+
+    <paper-drawer-panel id="paperDrawerPanel">
+      <!-- Drawer Scroll Header Panel -->
+      <paper-scroll-header-panel drawer fixed>
+
+        <!-- Drawer Toolbar -->
+        <paper-toolbar id="drawerToolbar" style='height:100px; padding-top:7%;'>
+          <span class="menu-name"><center><img style='margin-left:50px; height:80px;' src="data:image/jpeg;base64,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"/></center></span>
+        </paper-toolbar>
+
+        <!-- Drawer Content -->
+        <paper-menu class="app-menu" attr-for-selected="data-route" selected="[[route]]">
+          <a data-route="mytasks" href="{{baseUrl}}mytasks" onclick='setCont(1)'>
+            <iron-icon icon="list"></iron-icon>
+            <span>Tasks</span>
+          </a>
+
+          <a data-route="recycle_bin" href="{{baseUrl}}recycle_bin" onclick='recycle_task_list()'>
+            <iron-icon icon="delete"></iron-icon>
+            <span>Recycle Tasks</span>
+          </a>
+
+          <a data-route="about" href="{{baseUrl}}about">
+            <iron-icon icon="info"></iron-icon>
+            <span>About</span>
+          </a>
+
+          <a data-route="my_account" href="{{baseUrl}}my_account">
+            <iron-icon icon="settings"></iron-icon>
+            <span>My Account</span>
+          </a>
+
+
+          <a data-route="logout" href="#" onclick='logoutP()'>
+            <iron-icon icon="settings"></iron-icon>
+            <span>Logout</span>
+          </a>
+        </paper-menu>
+      </paper-scroll-header-panel>
+
+      <!-- Main Area -->
+      <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+        <!-- Main Toolbar -->
+        <paper-toolbar   id='mainToolbar1'>
+          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+
+     
+    <!-- <span class="space"></span>->
+
+          <!-- Toolbar icons -->
+        <!-- 
+         <paper-icon-button icon="refresh"></paper-icon-button>
+          <paper-icon-button icon="search"></paper-icon-button>
+        -->
+
+          <!-- Application name -->
+            <center>
+          <div style='padding-left:13%' class="middle middle-container">
+          <div class="app-name1"><h3>TodoThis</h3></div>
+          </div>
+          </center>
+
+         
+
+
+        </paper-toolbar>
+
+
+
+
+
+
+
+        <!-- Main Content -->
+        <div class="content">
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">
+           
+
+            <section data-route="mytasks" tabindex="-1">
+              
+
+
+              <paper-material elevation="1" style='box-shadow:none;'>
+             <my-container></my-container>
+               </paper-material>
+
+             
+
+            </section>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <section data-route="recycle_bin" tabindex="-1">
+              <paper-material elevation="1" style='box-shadow:none;'>
+               <h3>Recycle tasks <span style='font-size:13px;'>(A recycle bin for deleted tasks). Double tap <iron-icon icon="refresh"></iron-icon> to restore</span></h3>
+               <hr>
+               <div style='margin-top:3%;'>
+                <div id='recycle_cont'></div>
+               </div>
+              </paper-material>
+            </section>
+
+
+
+
+
+
+
+         
+              <section data-route="my_account" tabindex="-1">
+              <paper-material elevation="1" style='box-shadow:none;'>
+                <my-account></my-account>
+              </paper-material>
+            </section>
+
+
+
+
+
+
+            <section data-route="about" tabindex="-1">
+              <paper-material elevation="1" style='box-shadow:none;'>
+                <app-about></app-about>
+              </paper-material>
+            </section>
+
+
+
+
+
+
+          </iron-pages>
+        </div>
+      </paper-scroll-header-panel>
+    </paper-drawer-panel>
+
+  <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()"></span>
+    </paper-toast>
+
+  </template>
+
+  <!-- build:js scripts/app.js -->
+  <script src="scripts/app.js"></script>
+   <script type='text/javascript'>
+$(document).ready(function(){
+setTimeout(function(){
+setCont(1);
+pm_setTasklist();
+recycle_task_list();
+},1000);  
+
+
+
+
+
+
+
+
+setInterval(function(){
+if(localStorage.getItem('accountid')=="" || localStorage.getItem('accountid')==null){
+window.location.href="http://todothis.x10host.com/todo/index.html";
+}
+},1000);
+
+
+
+
+
+
+});
+
+  </script> 
+  <!-- endbuild-->
+</body>
+
+</html>
