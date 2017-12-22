@@ -18,10 +18,11 @@
       "sizes": "192x192"
     }
   ],
-  "start_url": "https://espinojim2.github.io/randy/index.html",
+  "start_url": "./index.html",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF",
   "display":"standalone",
   "orientation":"portrait"
   
 }
+
