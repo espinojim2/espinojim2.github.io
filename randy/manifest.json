@@ -3,22 +3,22 @@
   "name": "R.a.n.d.y",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "https://espinojim2.github.io/randy/icon.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "icon.png",
+      "src": "https://espinojim2.github.io/randy/icon.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "icon.png",
+      "src": "https://espinojim2.github.io/randy/icon.png",
       "type": "image/png",
       "sizes": "192x192"
     }
   ],
-  "start_url": "index.html",
+  "start_url": "https://espinojim2.github.io/randy/index.html",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF",
   "display":"standalone",
