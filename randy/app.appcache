@@ -1,0 +1,8 @@
+CACHE MANIFEST
+# v1 - 2011-08-13
+# This is a comment.
+index.html
+icon.png
+jquery.min.js
+bootstrap/css/bootstrap.min.css
+bootstrap/js/bootstrap.min.js
