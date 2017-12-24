@@ -22,7 +22,7 @@
 <div class='container' style='margin-top:100px;'>
 
 <div id='setcont0' class='setcont'><center style='margin-top:200px;'>
-	<button class='btn btn-success btn-lg' onclick='goraffle()'>GO!</button>
+	<button class='btn btn-success btn-lg go' onclick='goraffle()'>GO!</button>
 	<button class='btn btn-warning btn-lg' onclick='resetna()'>Restart!</button>
 
 </center></div>
@@ -34,7 +34,7 @@
 <div style='margin-bottom:1%; font-size:20px;' align='center'>
 	<center><h1><span id='name'></span></h1></center>
 <div id='randpic1' align='center'></div>	
-<center style='margin-top:2%;'><button class='btn btn-success btn-lg' onclick='goraffle()'>Another!</button><button class='btn btn-warning btn-lg' onclick='resetna()'>Reset Na!</button></center>
+<center style='margin-top:2%;'><button class='btn btn-success btn-lg go' onclick='goraffle()'>Another!</button><button class='btn btn-warning btn-lg' onclick='resetna()'>Reset Na!</button></center>
 </div>
 
 
@@ -89,7 +89,9 @@ $('#setcont'+n1).show();
 }
 
 function goraffle(){
+	$('.go').prop("disabled",true);
 	var x=randomz(0,n.length);
+	console.log(x+" -- ");
 	var name=n[x];
 	var pic=p[x];
 	setcont(1);
@@ -101,6 +103,7 @@ function goraffle(){
 		$('#name').text(name);
 		$('#randpic1').html("<img style='width:230px;' src='img/"+pic+"'/>");
 		setcont(2);
+		$('.go').prop("disabled",false);
 	},5000);
 }
 
@@ -111,15 +114,17 @@ function goraffle(){
 
 function randomz(x,length){
 
-if(x==length-1){ return y; }
+if(x==length-1){  return 0; alert("Tapos na lahat"); }
 else{
 	var y=parseInt((Math.random()*(n.length)));
+	console.log("B="+y);
 	if(s[y]==0){
 		s[y]=1;
 		return y;
 	}
 	else{
-		randomimages(x+1,length);
+		console.log("B1="+y);
+		return randomz(x+1,length);
 	}
 }
 
