@@ -1,0 +1,151 @@
+<html >
+	<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+	<head>
+<title>Raffle</title>
+	
+<link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.min.css"/>\
+<style type="text/css">
+
+.setcont{ display:none; }
+</style>
+</head>
+	<script>
+	
+
+	</script>
+<body>
+<div style='width:100%; height:auto; padding:1%; position:absolute; top:0; left:0;background:rgba(0,255,100,1);'>
+<center><h2 style='color:#fff;'>Raffle</h2></center>
+</div>
+
+<div class='container' style='margin-top:100px;'>
+
+<div id='setcont0' class='setcont'><center style='margin-top:200px;'>
+	<button class='btn btn-success btn-lg' onclick='goraffle()'>GO!</button>
+	<button class='btn btn-warning btn-lg' onclick='resetna()'>Restart!</button>
+
+</center></div>
+
+<div id='setcont1' class='setcont'><div style='margin-bottom:1%; font-size:20px;' align='center'><b>Choosing Now...please wait...</b></div><div id='randpic' align='center'></div></div>
+
+<div id='setcont2' class='setcont'>
+
+<div style='margin-bottom:1%; font-size:20px;' align='center'>
+	<center><h1><span id='name'></span></h1></center>
+<div id='randpic1' align='center'></div>	
+<center style='margin-top:2%;'><button class='btn btn-success btn-lg' onclick='goraffle()'>Another!</button><button class='btn btn-warning btn-lg' onclick='resetna()'>Reset Na!</button></center>
+</div>
+
+
+</div>
+
+</div>
+</body>
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+setcont(0);	
+randomimages(0,9);
+});
+
+var n=["Jae","Jeph","Emma","Lisa","Ate Bhe","Yen","Zac","Nay","Ghie"];
+var s=[0,0,0,0,0,0,0,0,0];
+var p=[
+"jae.jpg",
+"jeph.jpg",
+"ma.jpg",
+"mamalisa.jpg",
+"tebhe.jpg",
+"yen.jpg",
+"zac.jpg",
+"nay.jpg",
+"ghie.jpg"
+];
+
+function resetna(){
+n=["Jae","Jeph","Emma","Lisa","Ate Bhe","Yen","Zac","Nay","Ghie"];
+s=[0,0,0,0,0,0,0,0,0];
+p=[
+"jae.jpg",
+"jeph.jpg",
+"ma.jpg",
+"mamalisa.jpg",
+"tebhe.jpg",
+"yen.jpg",
+"zac.jpg",
+"nay.jpg",
+"ghie.jpg"
+];
+
+setcont(0);	
+randomimages(0,9);	
+}
+
+function setcont(n1){
+$('.setcont').hide();
+$('#setcont'+n1).show();
+}
+
+function goraffle(){
+	var x=randomz(0,n.length);
+	var name=n[x];
+	var pic=p[x];
+	setcont(1);
+	$('embed').remove();
+		$('body').append('<embed src="spinning-raffle-roller-2.wav" autostart="true" hidden="true" loop="false">');
+
+
+	setTimeout(function(){
+		$('#name').text(name);
+		$('#randpic1').html("<img style='width:230px;' src='img/"+pic+"'/>");
+		setcont(2);
+	},5000);
+}
+
+
+
+
+
+
+function randomz(x,length){
+
+if(x==length-1){ return y; }
+else{
+	var y=parseInt((Math.random()*(n.length)));
+	if(s[y]==0){
+		s[y]=1;
+		return y;
+	}
+	else{
+		randomimages(x+1,length);
+	}
+}
+
+
+
+}
+
+function randomimages(x,length){
+if(x==length-1){ x=0; }
+else{
+	x+=1;
+}
+
+if(s[x]==0){
+$('#randpic').html("<img style='width:230px;' src='img/"+p[x]+"'/>");
+}
+setTimeout(function(){
+
+	randomimages(x,length)
+
+},100);
+
+
+
+}
+
+
+</script>
+</html>
