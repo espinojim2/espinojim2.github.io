@@ -1,0 +1,79 @@
+
+<html>
+<head>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUAQEIgzYzhqtHx3L2eX8DHjV_svQbLEU"></script>
+<script type="text/javascript">
+function initialize(){directionsDisplay=new google.maps.DirectionsRenderer;var e=new google.maps.LatLng(-37.813187,144.96298),o={zoom:12,mapTypeId:google.maps.MapTypeId.ROADMAP,center:e};map=new google.maps.Map(document.getElementById("map_canvas"),o),directionsDisplay.setMap(map)}function initial2(){navigator.geolocation?navigator.geolocation.getCurrentPosition(function(e){var o=e.coords.latitude,t=e.coords.longitude;directionsDisplay=new google.maps.DirectionsRenderer;var i=new google.maps.LatLng(o,t),n={zoom:12,mapTypeId:google.maps.MapTypeId.ROADMAP,center:i};map=new google.maps.Map(document.getElementById("map_canvas"),n),directionsDisplay.setMap(map)},function(){}):alert("It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.")}function getDistance(){var e=document.querySelector("#from").value,o=document.querySelector("#to").value;document.querySelector("#distance").value="";var t={origin:e,destination:o,travelMode:google.maps.DirectionsTravelMode.DRIVING};directionsService.route(t,function(e,o){if(o==google.maps.DirectionsStatus.OK){directionsDisplay.setDirections(e);var t=parseFloat(e.routes[0].legs[0].distance.value),i=.001*t;document.querySelector("#distance").value=round(i,2)+" km"}else document.querySelector("#distance").value="oops, there's no route between these two locations"})}function round(e,o){return Number(Math.round(e+"e"+o)+"e-"+o)}var directionDisplay,map,directionsService=new google.maps.DirectionsService;
+</script>
+	<style type="text/css">
+			#map_canvas { 
+				height: 200px;
+			}
+		</style>
+
+</head>
+<body onload="initial2()"> 
+
+
+
+
+
+<div style='height:70px; position:absolute; left:0; top:0; background:#000; width:100%; z-index:1000;'>
+<center>
+<h2 style='color:#fff;'>Driving Distance Calculator</h2>
+</center>
+</div>
+<div class='container' style='padding-top:100px;'>
+
+<div class='row'>
+<div class='col-sm-12'>
+<label>From</label>
+<input class='form-control' placeholder='Location' type='text' id='from'>
+</div>
+</div>
+
+<div class='row'>
+<div class='col-sm-12'>
+<label>TO</label>
+<input class='form-control' type='text' placeholder='Location' id='to'>
+</div>
+</div>
+
+<div>
+<button onclick='getDistance()' class='btn btn-defauld'>Compute Distance</button>
+</div>
+
+<div class='row'>
+<div class='col-sm-12'>
+<label>Distance</label>
+<input type='text' id='distance' class='form-control' disabled>
+
+</div>
+
+</div>
+
+<div style='padding:2%;'>
+<div id="map_canvas"></div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
