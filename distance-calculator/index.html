@@ -13,7 +13,117 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUAQEIgzYzhqtHx3L2eX8DHjV_svQbLEU"></script>
 <script type="text/javascript">
-function initialize(){directionsDisplay=new google.maps.DirectionsRenderer;var e=new google.maps.LatLng(-37.813187,144.96298),o={zoom:12,mapTypeId:google.maps.MapTypeId.ROADMAP,center:e};map=new google.maps.Map(document.getElementById("map_canvas"),o),directionsDisplay.setMap(map)}function initial2(){navigator.geolocation?navigator.geolocation.getCurrentPosition(function(e){var o=e.coords.latitude,t=e.coords.longitude;directionsDisplay=new google.maps.DirectionsRenderer;var i=new google.maps.LatLng(o,t),n={zoom:12,mapTypeId:google.maps.MapTypeId.ROADMAP,center:i};map=new google.maps.Map(document.getElementById("map_canvas"),n),directionsDisplay.setMap(map)},function(){}):alert("It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.")}function getDistance(){var e=document.querySelector("#from").value,o=document.querySelector("#to").value;document.querySelector("#distance").value="";var t={origin:e,destination:o,travelMode:google.maps.DirectionsTravelMode.DRIVING};directionsService.route(t,function(e,o){if(o==google.maps.DirectionsStatus.OK){directionsDisplay.setDirections(e);var t=parseFloat(e.routes[0].legs[0].distance.value),i=.001*t;document.querySelector("#distance").value=round(i,2)+" km"}else document.querySelector("#distance").value="oops, there's no route between these two locations"})}function round(e,o){return Number(Math.round(e+"e"+o)+"e-"+o)}var directionDisplay,map,directionsService=new google.maps.DirectionsService;
+var directionDisplay;
+var map;
+var directionsService = new google.maps.DirectionsService();
+	function initialize() {
+
+
+
+
+
+
+			directionsDisplay = new google.maps.DirectionsRenderer();
+			var melbourne = new google.maps.LatLng(-37.813187, 144.96298);
+			var myOptions = {
+				zoom:12,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				center: melbourne
+			}
+
+			map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+			directionsDisplay.setMap(map);
+		}
+
+
+
+
+
+
+
+function initial2(){
+
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position){
+    var lat = position.coords.latitude;
+    var longt = position.coords.longitude;
+
+
+		directionsDisplay = new google.maps.DirectionsRenderer();
+			var melbourne = new google.maps.LatLng(lat,longt);
+			var myOptions = {
+				zoom:12,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				center: melbourne
+			}
+
+			map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+			directionsDisplay.setMap(map);
+
+
+
+
+    }, function(){ });
+} else {
+    alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function getDistance(){
+var from= document.querySelector('#from').value;	
+var to= document.querySelector('#to').value;	
+
+document.querySelector('#distance').value="";
+
+var request = {
+  origin      : from, // a city, full address, landmark etc
+  destination : to,
+  travelMode  : google.maps.DirectionsTravelMode.DRIVING
+};
+
+directionsService.route(request, function(response, status) {
+  if ( status == google.maps.DirectionsStatus.OK ) {
+    directionsDisplay.setDirections(response);
+
+
+    var distance_meters=parseFloat(response.routes[0].legs[0].distance.value); // the distance in metres
+   var distance_km=distance_meters*0.001;
+document.querySelector('#distance').value=round(distance_km,2)+" km";	
+ 
+  }
+  else {
+ document.querySelector('#distance').value="oops, there's no route between these two locations";	 
+    // oops, there's no route between these two locations
+    // every time this happens, a kitten dies
+    // so please, ensure your address is formatted properly
+  }
+});
+
+
+
+
+
+
+
+
+
+}
+
+
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
 </script>
 	<style type="text/css">
 			#map_canvas { 
