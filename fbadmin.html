@@ -1,0 +1,293 @@
+<html>
+<head><title></title>
+
+<style type="text/css">
+.setcont{ display: none;}
+</style>
+</head>
+<body>
+<button onclick='setcont(1)'>Commenting</button>	
+<button onclick='setcont(2)'>People Settings</button>
+
+<div id='setcont1' class='setcont'>
+<div style='padding:3%;'>
+<button onclick='post_comments()'>Post Comments</button>
+<table id='ptbl1' style='width:100%; border-collapse:collapse;' border='1' >
+<thead>
+<tr>
+<th>Name</th>
+<th>pic Url</th>
+<th>Comment</th>
+<th>Use in comment?</th>
+<th>TIme posted ago</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<button onclick='post_comments()'>Post Comments</button>
+</div>
+
+</div>
+<div id='setcont2' class='setcont'>
+<div style='padding:3%;'>
+<button onclick='add_new()'>Add</button>
+<table id='ptbl' style='width:100%; border-collapse:collapse;' border='1' >
+<thead>
+<tr>
+<th>Name</th>
+<th>pic Url</th>
+<th>Edit</th>
+<th>Delete</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+
+</div>
+
+
+
+
+</div>
+<div id='setcont3' class='setcont'>
+<div style='padding:3%;'>
+
+<input type='hidden' id='mode' value='add'>
+<input type='hidden' id='form_id' value=''>
+
+<button onclick='setcont(2)'>Back</button><hr>
+<div align='center'>
+<div style='width:40%;' >
+<div class='row' style='margin-bottom:2%;'>
+<div class='col-sm-12'>
+<label>Name</label>
+<input type='text' class='form-control' id='form_name'>
+</div>
+</div>
+
+<div class='row' style='margin-bottom:2%;'>
+<div class='col-sm-12'>
+<label>Pic URL</label>
+<input type='text' class='form-control' id='form_url'>
+</div>
+</div>
+
+<div class='row' style='margin-bottom:2%;'>
+<div class='col-sm-12' align='center'>
+<button onclick='save_people()'> Save</button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+ $(document).ready(function(){
+setcont(1);
+people_list();
+ });
+
+
+
+ function setcont(n){
+ 	$('.setcont').hide();
+ 	$('#setcont'+n).show();
+ }
+
+
+
+ function add_new(){
+setcont(3);
+$('#form_name').val("");
+	$('#form_url').val("");
+	$('#mode').val("add");
+ }
+
+
+function people_list(){
+var data=(localStorage.getItem("fbcomment_data"))?JSON.parse(localStorage.getItem("fbcomment_data")):[];
+
+var str=""; var str1="";
+for(var x=0;x<data.length;x++){
+	var name=data[x].name;
+	var purl=data[x].purl;
+	var id=data[x].id;
+	str+=`
+	<tr>
+	<td>
+	<input type='hidden' id='tbl_data`+x+`' value='`+JSON.stringify(data[x])+`'/>
+	`+name+`</td>
+	<td align='center'><img title='`+purl+`' src='`+purl+`'></td>
+	<td><button onclick='edit_person(`+x+`)'>Edit</button></td>
+	<td><button onclick='delete_person(`+x+`)'>Delete</button></td>
+	</tr>
+	`;
+
+
+
+
+	str1+=`
+	<tr>
+	<td>
+	<input type='hidden' id='tbl2_data`+x+`' value='`+JSON.stringify(data[x])+`'/>
+	`+name+`</td>
+	<td align='center'><img title='`+purl+`' src='`+purl+`'></td>
+	<td><textarea id='tbl2_comment`+x+`' style='width:100%;' placeholder='Write comment here ... '></textarea></td>
+	<td>
+	<select id='tbl2_tpost`+x+`'>
+	<option value='1'>Yes</option>
+<option value='0'>No</option>
+
+	</select>
+	</td>
+	<td><input type='text' value='1min' id='tbl2_time`+x+`'/> </td>
+	</tr>
+	`;
+
+
+
+
+
+}
+
+$('#ptbl tbody').html(str);
+$('#ptbl1 tbody').html(str1);
+
+}
+
+
+
+
+function edit_person(x){
+var data=JSON.parse($('#tbl_data'+x).val());
+$('#mode').val("edit");
+	$('#form_name').val(data.name);
+	$('#form_url').val(data.purl);
+	$('#form_id').val(data.id);
+	setcont(3);
+}
+
+
+
+function delete_person(x){
+var data=(localStorage.getItem("fbcomment_data"))?JSON.parse(localStorage.getItem("fbcomment_data")):[];
+var index=(localStorage.getItem("fbcomment_data"))?(data.length):0;
+var z=0;
+
+var n=JSON.parse($('#tbl_data'+x).val());
+var data1=[];
+for(var x1=0;x1<index;x1++){
+	var id1=data[x1].id;
+	if(id1!=n.id){
+		data1[z]={};
+		data1[z].name=data[x].name;
+		data1[z].purl=data[x].purl;
+		z+=1;
+	}
+
+}
+
+localStorage.setItem("fbcomment_data",JSON.stringify(data1));
+people_list();
+
+
+
+
+
+
+
+}
+
+function save_people(){
+	var mode=$('#mode').val();
+	var name=$('#form_name').val();
+	var purl=$('#form_url').val();
+	var id=$('#form_id').val();
+	var data=(localStorage.getItem("fbcomment_data"))?JSON.parse(localStorage.getItem("fbcomment_data")):[];
+var index=(localStorage.getItem("fbcomment_data"))?(data.length):0;
+
+
+
+if(mode=='add'){
+
+
+
+	data[index]={
+		id:index,
+		name:name,
+		purl:purl
+	};
+
+
+localStorage.setItem("fbcomment_data",JSON.stringify(data));
+setcont(2);
+people_list();
+}
+else if(mode=='edit'){
+
+for(var x=0;x<index;x++){
+	var id1=data[x].id;
+	if(id1==id){
+		data[x].name=name;
+		data[x].purl=purl;
+	}
+
+}
+
+localStorage.setItem("fbcomment_data",JSON.stringify(data));
+setcont(2);
+people_list();
+
+}
+
+
+
+	
+}
+
+
+
+
+function post_comments(){
+
+var data=(localStorage.getItem("fbcomment_data"))?JSON.parse(localStorage.getItem("fbcomment_data")):[];
+var comment_data=[]; var z=0;
+var str=""; var str1="";
+for(var x=0;x<data.length;x++){
+	var name=data[x].name;
+	var purl=data[x].purl;
+	var id=data[x].id;
+
+
+	var comment=$('#tbl2_comment'+x).val();
+	var tpost=$('#tbl2_tpost'+x).val();
+	var time=$('#tbl2_time'+x).val();
+
+
+	if(tpost==1 && comment!=""){
+		comment_data[z]={
+			name:name,
+			purl:purl,
+			id:id,
+			comment:comment,
+			time:time
+		}
+		z+=1;
+	}
+
+}
+
+localStorage.setItem("comment_data",JSON.stringify(comment_data));
+alert("Your comments are updated");
+
+}
+  </script>
+</html>
