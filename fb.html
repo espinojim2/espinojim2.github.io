@@ -175,7 +175,7 @@ requireLazy(["gkx"], function(gkx) {gkx.add({"AT4kYIk7PhRqUACJJM8qs58t-WNCoM2ZYe
 
 
 
-</div></div><div id="addComment_2264806856862871" class="UFIRow _4oep UFIAddComment UFIAddCommentWithPhotoAttacher _2o9m" data-ft="{&quot;tn&quot;:&quot;[&quot;}"><div class="UFIMentionsInputWrap UFIStickersEnabledInput UFIGifEnabledInput clearfix" direction="left"><div class="_ohe lfloat"><div class="UFIReplyActorPhotoWrapper img _8o _8r UFIImageBlockImage" role="presentation"><img alt="Jeam Espinosa" class="img UFIActorImage _54ru img" src="https://scontent.fmnl13-1.fna.fbcdn.net/v/t1.0-1/c0.0.50.50/p50x50/18194091_1417653814984940_8343566149143032735_n.jpg?_nc_cat=0&oh=80bc506c17d25842cb96d072b170f45d&oe=5BAADF6D"></div></div><div class=""><div class="UFIImageBlockContent _42ef _8u"><div class="UFICommentContainer"><div class="_fmi _613v UFIInputContainer"><div class="_2xwx _289c" role="presentation">
+</div></div><div id="addComment_2264806856862871" class="UFIRow _4oep UFIAddComment UFIAddCommentWithPhotoAttacher _2o9m" data-ft="{&quot;tn&quot;:&quot;[&quot;}"><div class="UFIMentionsInputWrap UFIStickersEnabledInput UFIGifEnabledInput clearfix" direction="left"><div class="_ohe lfloat"><div class="UFIReplyActorPhotoWrapper img _8o _8r UFIImageBlockImage" role="presentation"><img alt="" id='mypurl' class="img UFIActorImage _54ru img" src="https://scontent.fmnl13-1.fna.fbcdn.net/v/t1.0-1/c0.0.50.50/p50x50/18194091_1417653814984940_8343566149143032735_n.jpg?_nc_cat=0&oh=80bc506c17d25842cb96d072b170f45d&oe=5BAADF6D"></div></div><div class=""><div class="UFIImageBlockContent _42ef _8u"><div class="UFICommentContainer"><div class="_fmi _613v UFIInputContainer"><div class="_2xwx _289c" role="presentation">
 <input class="_1osa mentionsHidden" name="add_comment_text" tabindex="-1" placeholder='Write a comment...'>
 <div class="UFIAddCommentInput _1osb _2xww _5yk1" role="presentation"><div class="_5yk2" tabindex="-1"><div class="_5rp7">
 <div class="_1p1t">
@@ -202,18 +202,24 @@ $(document).ready(function(){
 
 
 setComments(); 
-
+getMydata();
 $('body').keyup(function(e){
 	if(e.keyCode==13){
+
+
+		var n=(localStorage.getItem("mydata"))?JSON.parse(localStorage.getItem("mydata")):{};
+
+
+
 		$('#comment_js_4s').append(`
 
 
-	<div class="_3b-9"><div><div direction="left" class="clearfix"><div class="_ohe lfloat"><a class="UFICommentAuthorWithPresence img _8o _8s UFIImageBlockImage" data-ft="{&quot;tn&quot;:&quot;T&quot;}" data-hovercard="/ajax/hovercard/hovercard.php?id=1314057936&amp;extragetparams=%7B%22on_public_ufi%22%3Afalse%2C%22hc_location%22%3A%22ufi%22%7D" target="_self" href="https://www.facebook.com/ernest.guillermo?fref=ufi" tabindex="-1" aria-hidden="true"><img alt="Ernesto Guillermo" class="img UFIActorImage _54ru img" src="https://scontent.fmnl13-1.fna.fbcdn.net/v/t1.0-1/c0.0.50.50/p50x50/18194091_1417653814984940_8343566149143032735_n.jpg?_nc_cat=0&oh=80bc506c17d25842cb96d072b170f45d&oe=5BAADF6D"><div class="UFICommentAuthorPresence"></div></a></div><div class=""><div class="UFIImageBlockContent _42ef">
+	<div class="_3b-9"><div><div direction="left" class="clearfix"><div class="_ohe lfloat"><a class="UFICommentAuthorWithPresence img _8o _8s UFIImageBlockImage" data-ft="{&quot;tn&quot;:&quot;T&quot;}" data-hovercard="/ajax/hovercard/hovercard.php?id=1314057936&amp;extragetparams=%7B%22on_public_ufi%22%3Afalse%2C%22hc_location%22%3A%22ufi%22%7D" target="_self" href="https://www.facebook.com/ernest.guillermo?fref=ufi" tabindex="-1" aria-hidden="true"><img alt="Ernesto Guillermo" class="img UFIActorImage _54ru img" src="`+n.purl+`"><div class="UFICommentAuthorPresence"></div></a></div><div class=""><div class="UFIImageBlockContent _42ef">
 
 <div class="UFICommentContentBlock"><div class="UFICommentContent"><div class="_26f8"><div class="_10la">
 
 
-<span class=" UFICommentActorAndBody"><span class=""><a data-ft="{&quot;tn&quot;:&quot;;&quot;}" target="_self" class=" UFICommentActorName" data-hovercard="/ajax/hovercard/hovercard.php?id=100000527801251&amp;extragetparams=%7B%22is_public%22%3Afalse%2C%22hc_location%22%3A%22ufi_admin%22%7D" dir="ltr" href="https://www.facebook.com/jeam.espinosa?fref=ufi" aria-describedby="js_91u" aria-owns="" id="js_91v">Hayme Lopez</a></span> <span><span> <span data-ft="{&quot;tn&quot;:&quot;K&quot;}"><span class="UFICommentBody"><span>`+$('.fbtext').text()+`<span aria-hidden="true" class="_7oe">:D</span></span></span></span></span></span></span></span>
+<span class=" UFICommentActorAndBody"><span class=""><a data-ft="{&quot;tn&quot;:&quot;;&quot;}" target="_self" class=" UFICommentActorName" data-hovercard="/ajax/hovercard/hovercard.php?id=100000527801251&amp;extragetparams=%7B%22is_public%22%3Afalse%2C%22hc_location%22%3A%22ufi_admin%22%7D" dir="ltr" href="https://www.facebook.com/jeam.espinosa?fref=ufi" aria-describedby="js_91u" aria-owns="" id="js_91v">`+n.name+`</a></span> <span><span> <span data-ft="{&quot;tn&quot;:&quot;K&quot;}"><span class="UFICommentBody"><span>`+$('.fbtext').text()+`<span aria-hidden="true" class="_7oe">:D</span></span></span></span></span></span></span></span>
 
 
 
@@ -289,6 +295,30 @@ str+=`
 
 $('#comment_js_4s').html(str);
 
+
+}
+
+
+function getMydata(){
+var n=(localStorage.getItem("mydata"))?JSON.parse(localStorage.getItem("mydata")):{};
+
+if(n){
+
+
+
+$('#mypurl').attr("src",n.purl);
+
+
+
+
+
+
+
+
+
+
+
+}
 
 }
 </script>
