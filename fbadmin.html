@@ -8,6 +8,7 @@
 <body>
 <button onclick='setcont(1)'>Commenting</button>	
 <button onclick='setcont(2)'>People Settings</button>
+<button onclick='setcont(4)'>My Settings</button>
 
 <div id='setcont1' class='setcont'>
 <div style='padding:3%;'>
@@ -84,6 +85,42 @@
 </div>
 
 </div>
+
+
+<div id='setcont4' class='setcont'>
+
+
+
+	<div align='center'>
+<div style='width:40%;' >
+<div class='row' style='margin-bottom:2%;'>
+<div class='col-sm-12'>
+<label>My Name</label>
+<input type='text' class='form-control' id='form_myname'>
+</div>
+</div>
+
+<div class='row' style='margin-bottom:2%;'>
+<div class='col-sm-12'>
+<label>My FB Pic URL</label>
+<input type='text' class='form-control' id='form_myurl'>
+</div>
+</div>
+
+<div class='row' style='margin-bottom:2%;'>
+<div class='col-sm-12' align='center'>
+<button onclick='save_my()'> Save</button>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+</div>
+
+
 </body>
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -93,6 +130,7 @@
  $(document).ready(function(){
 setcont(1);
 people_list();
+getMydata();
  });
 
 
@@ -287,6 +325,32 @@ for(var x=0;x<data.length;x++){
 
 localStorage.setItem("comment_data",JSON.stringify(comment_data));
 alert("Your comments are updated");
+
+}
+
+
+function save_my(){
+
+var name=$('#form_myname').val();
+var purl=$('#form_myurl').val();
+var data={
+	name:name,
+	purl:purl
+}
+
+localStorage.setItem("mydata",JSON.stringify(data));
+alert("My Data is saved");
+}
+
+function getMydata(){
+var n=(localStorage.getItem("mydata"))?JSON.parse(localStorage.getItem("mydata")):{};
+
+if(n){
+
+$('#form_myname').val(n.name);
+$('#form_myurl').val(n.purl);
+
+}
 
 }
   </script>
