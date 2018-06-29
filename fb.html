@@ -206,6 +206,8 @@ $(document).ready(function(){
 
 setComments(); 
 getMydata();
+	
+setInterval(function(){ $('img').css({'border-radius':'50%'}); },1000);
 $('body').keyup(function(e){
 	if(e.keyCode==13){
 
