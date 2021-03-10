@@ -5,7 +5,7 @@ Promise.all([
   faceapi.nets.faceLandmark68Net.loadFromUri(mods),
   faceapi.nets.faceRecognitionNet.loadFromUri(mods),
   faceapi.nets.faceExpressionNet.loadFromUri(mods),
-  faceapi.nets.ssdMobilenetv1.loadFromUri(mods)
+faceapi.nets.ssdMobilenetv1.loadFromUri(mods)
 
 ]).then(startVideo)
 
@@ -29,7 +29,7 @@ video.addEventListener('play', () => {
   const displaySize = { width: video.width, height: video.height }
   faceapi.matchDimensions(canvas, displaySize)
   setInterval(async () => {
-    const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions().withFaceDescriptors()
+    const detections = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions().withFaceDescriptor()
     //console.log(detections);
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
    console.log(resizedDetections);
@@ -39,18 +39,23 @@ video.addEventListener('play', () => {
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
 
-const results = resizedDetections.map(d => {
-  return faceMatcher.findBestMatch(d.descriptor)
-  })
 
+const results = faceMatcher.findBestMatch(detections.descriptor)
+
+//const results = resizedDetections.map(d => {
+ // return faceMatcher.findBestMatch(d.descriptor)
+ // })
+const box = resizedDetections.detection.box
+const drawBox = new faceapi.draw.DrawBox(box, { label: results.label.toString() })
+      drawBox.draw(canvas)
 
 //console.log(results);
- results.forEach((result, i) => {
+ //results.forEach((result, i) => {
    //   console.log(result);
-      const box = resizedDetections[i].detection.box
-      const drawBox = new faceapi.draw.DrawBox(box, { label: result.label.toString() })
-      drawBox.draw(canvas)
-    })
+   //   const box = resizedDetections[i].detection.box
+    //  const drawBox = new faceapi.draw.DrawBox(box, { label: result.label.toString() })
+     // drawBox.draw(canvas)
+    //})
 
 
 
@@ -58,7 +63,6 @@ const results = resizedDetections.map(d => {
 })
 
 }
-
 
 
 
