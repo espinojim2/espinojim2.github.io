@@ -69,7 +69,7 @@ function loadLabeledImages() {
       const descriptions = []
       for (let i = 1; i <= 2; i++) {
         //const img = await faceapi.fetchImage(`https://raw.githubusercontent.com/WebDevSimplified/Face-Recognition-JavaScript/master/labeled_images/${label}/${i}.jpg`)
-        const img = await faceapi.fetchImage(`http://espinojim2.github.io/FR/labeled_images/${label}/${i}.jpg`)
+        const img = await faceapi.fetchImage(`https://espinojim2.github.io/FR/labeled_images/${label}/${i}.jpg`)
 
 
         
