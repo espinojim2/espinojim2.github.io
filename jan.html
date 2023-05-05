@@ -58,7 +58,7 @@
 
     function display_recent(){
         var name=localStorage.getItem('date_name');
-        if(name){
+        if(name!=null){
         $('#prevnme').text(`Previous name was ${name}`);
         }
         else{ $('#prevnme').text(""); }
