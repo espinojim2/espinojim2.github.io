@@ -67,6 +67,7 @@
         var name=$('#dte_name').val();
         localStorage.setItem('date_name',name);
         toastr.success("Congratulations "+name+" !!!");
+        setTimeout(function(){ window.location.href="./jan.html"; },3000);
     }
   </script>
 </head>
