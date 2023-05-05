@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Uncle Jims Code</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Include jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Include Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <!-- Include Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <style>
+    .no-button {
+      position: relative;
+      transition: all 0.5s ease;
+    }
+  </style>
+  <script>
+    $(document).ready(function() { setcont(1); display_recent();
+      // Get the width and height of the container
+      var containerWidth = $(".container").width();
+      var containerHeight = $(".container").height();
+
+      // Move the "no" button randomly within the container
+      function moveNoButton() {
+        var noButton = $(".no-button");
+        var x = Math.random() * (containerWidth - noButton.width());
+        var y = Math.random() * (containerHeight - noButton.height());
+        noButton.css({
+          left: x,
+          top: y
+        });
+      }
+
+      // Move the "no" button when the mouse is hovering over it
+      $(".no-button").mouseenter(function() {
+        moveNoButton();
+      });
+    });
+
+
+    function setcont(n){
+        $('.setcont').hide();
+        $('#setcont'+n).show();
+
+    }
+
+
+    function confirm_interest(){
+        $('#dte_name').val(""); /* resets name*/
+         $('#myModal').modal('show');
+    }
+
+    function display_recent(){
+        var name=localStorage.getItem('date_name');
+        if(name!=""){
+        $('#prevnme').text(`Previous name was ${name}`);
+        }
+        else{ $('#prevnme').text(""); }
+    }
+    function save_name(){
+        var name=$('#dte_name').val();
+        localStorage.setItem('date_name',name);
+        toastr.success("Congratulations "+name+" !!!");
+    }
+  </script>
+</head>
+<body>
+    <div class='alert alert-primary' id="prevnme"></div>
+    <div class="setcont" id="setcont1">
+         <h1>Hey Girl...</h1><br>
+    <img src="https://i.pinimg.com/originals/66/67/cb/6667cbcd58618263d811e1d19a744a94.jpg"/>
+   
+    <br><button class="btn btn-primary" onclick="setcont(2)">NEXT PAGE</button> 
+    
+    </div>
+        <div class="setcont" id="setcont2" style="display:none;">
+    <img src="https://i.pinimg.com/originals/23/08/07/2308079d99d73504d5939f0ca073e853.jpg"/>
+     
+    
+  <div class="container">
+    
+    <h1>... Wanna Go to Prom Together?</h1>
+    <div class="btn-group">
+      <button type="button" class="btn btn-success" onclick="confirm_interest()">Yes</button>
+      <button type="button" class="btn btn-danger no-button">No</button>
+    </div>
+  </div>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Enter your name to continue</h4>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="dte_name" class="form-control" placeholder="Enter your name ...">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick='save_name()' data-dismiss="modal">Save</button>
+</div>
+</div>
+</div>
+
+  </div>
+</body>
+</html>
+
+
+
+
+
+</body>
+</html>
