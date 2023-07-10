@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head><title>Jim's Image Generator</title></head>
+<body style='background:#fff;'>
+
+<h1>AI Backgrop Generator</h1>
+<div style='display:none;'>
+<label>Models</label>
+<select id="modelopts">
+<option value="https://api-inference.huggingface.co/models/digiplay/DreamShaper_7" selected>DreamShaper</option>
+<option value="https://api-inference.huggingface.co/models/emilianJR/XXMix_9realistic">XXMix_9realistic</option>
+
+</select>
+	</div>
+
+<textarea id="imageq" style="width:100%; height:50px;" placeholder='Type something to generate the background'></textarea>
+<button onclick="genimg_process()">Generate Image</button>
+<div id="my-div" style="width:100%;">Wait for it...
+<img style="width:100%;">
+</div>
+</body>
+</html>
+<script>
+
+document.body.oncontextmenu = function(event) {
+  event.preventDefault();
+  return false;
+};
+
+    async function query(data) {
+   // let defaultmodel = "https://api-inference.huggingface.co/models/digiplay/DreamShaper_7";   
+    let defaultmodel=document.querySelector('#modelopts').value;    
+	const response = await fetch(
+		defaultmodel,
+		{
+			headers: { Authorization: "Bearer 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" },
+			method: "POST",
+			body: JSON.stringify(data),
+		}
+	);
+	const result = await response.blob();
+	return result;
+}
+	//"masterpiece, (photorealistic:1.4), best quality, beautiful lighting, (ulzzang-6500:0.5), lucy \(cyberpunk\), 1girl, white hair, against railing, arm rest, bangs, bare shoulders, belt, black belt, black leotard, black pants, blurry, bob cut, breasts, building, cityscape, clothing cutout, (cropped jacket), cyberpunk, depth of field, from side, gradient eyes, grey eyes, grey hair, white jacket, leotard, lips, long sleeves, looking afar, looking ahead, (mechanical parts), medium breasts, multicolored eyes, multicolored hair, night, night sky, off shoulder, open clothes, open jacket, outdoors, pants, parted lips, railing, red eyeliner, science fiction, short hair with long locks, short shorts, shorts, sidelocks, sky, solo, standing, teeth, thigh cutout, upper teeth only, white jacket, white shorts, cyberpunk \(series\), cyberpunk edgerunners, RAW photo, 8k uhd, film grain, cosplay, white wig, night, neon lights,,,, <lora:lucy_offset:1.21>"
+	
+	query({"inputs": "generate image"}).then((response) => {
+	convertBlobToBase64(response);
+});
+
+
+function genimg_process(){
+    speak("Initiating Artwork Sequence, Please wait");   
+var q=document.querySelector('#imageq').value;
+
+var defpromp="masterpiece, best quality, (16:9), ";
+    query({"inputs": defpromp+""+q}).then((response) => {
+	convertBlobToBase64(response);
+});
+
+
+}
+
+
+function convertBlobToBase64(blob) {
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    const base64String = reader.result;
+    console.log(base64String);
+
+    const image = document.querySelector('img');
+image.src = base64String+"";
+
+
+
+
+
+  };
+  reader.readAsDataURL(blob);
+}
+
+
+
+
+
+function speak(text, callback) {
+    var u = new SpeechSynthesisUtterance();
+    u.text = text;
+    u.lang = 'en-UK';
+ 
+    u.onend = function () {
+        if (callback) {
+            callback();
+        }
+    };
+ 
+    u.onerror = function (e) {
+        if (callback) {
+            callback(e);
+        }
+    };
+ 
+    speechSynthesis.speak(u);
+}
+
+
+
+async function text_query(data) {
+	const response = await fetch(
+		"https://api-inference.huggingface.co/models/dorkai/pygmalion-2.7b",
+		{
+			headers: { Authorization: "Bearer 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" },
+			method: "POST",
+			body: JSON.stringify(data),
+		}
+	);
+	const result = await response.json();
+	return result;
+}
+
+
+async function llm_process(){
+
+    
+    speak("Let's make Art Epic")
+}
+
+</script>
+
+
+
