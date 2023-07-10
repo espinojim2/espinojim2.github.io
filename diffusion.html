@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><title>Jim's Chatbot</title></head>
-<body>
+<body style='background:#fff;'>
 <h1>Jim's Diffusion</h1>
 <label>Models</label>
 <select id="modelopts">
@@ -19,7 +19,7 @@
 
 
 </select>
-<textarea id="imageq" style="width:100%; height:50px;"></textarea>
+<textarea id="imageq" style="width:100%; height:50px;" placeholder='type something to generate images'></textarea>
 <button onclick="genimg_process()">Generate Image</button>
 <button onclick="llm_process()">Just talk</button>
 <div id="my-div" style="width:100%;">Wait for it...
