@@ -124,7 +124,7 @@ function speak(text, callback) {
 
 
 
-async function text_query(data) {
+async function text_query(filename) {
 const data = fs.readFileSync(filename);
 	const response = await fetch(
 		"https://api-inference.huggingface.co/models/nlpconnect/vit-gpt2-image-captioning",
