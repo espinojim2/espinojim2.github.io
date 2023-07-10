@@ -60,7 +60,12 @@ function genimg_process(){
 var q=document.querySelector('#imageq').value;
 
 var defpromp="masterpiece, best quality, (16:9), ";
-    query({"inputs": defpromp+""+q}).then((response) => {
+    query({
+	    "inputs": defpromp+""+q,
+	    "parameters": {
+    			"negative_prompt": 'blurry',
+  		}
+    }).then((response) => {
 	convertBlobToBase64(response);
 });
 
