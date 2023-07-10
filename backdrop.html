@@ -15,6 +15,8 @@
 
 <textarea id="imageq" style="width:100%; height:50px;" placeholder='Type something to generate the background'></textarea>
 <button onclick="genimg_process()">Generate Image</button>
+<a id='dlbtn' style='text-decoration:none;'><button>Download Image</button></a>	
+	
 <div id="my-div" style="width:100%;">Wait for it...
 <img style="width:100%;">
 </div>
@@ -69,7 +71,9 @@ function convertBlobToBase64(blob) {
 
     const image = document.querySelector('img');
 image.src = base64String+"";
-
+ const anchor=document.querySelector('a');
+ anchor.href=base64String+"";
+ anchor.download="c137-image.png";	  
 
 
 
