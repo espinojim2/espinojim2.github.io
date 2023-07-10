@@ -132,7 +132,7 @@ const file = new File([filename], "images.jpg", { type: "image/jpeg" });
 
   fileReader.onload = () => {
     const data = fileReader.result;
-    const response = await fetch(
+    const response = fetch(
       "https://api-inference.huggingface.co/models/nlpconnect/vit-gpt2-image-captioning",
       {
         headers: {
@@ -143,8 +143,11 @@ const file = new File([filename], "images.jpg", { type: "image/jpeg" });
       }
     );
 
-    const result = response.json();
-    return result;
+    return response.then((response) => {
+      const result = response.json();
+      return result;
+    });
+  };
   };
 	
 	/*
