@@ -126,8 +126,9 @@ function speak(text, callback) {
 
 async function text_query(filename) {
 
+const file = new File([filename], "images.jpg", { type: "image/jpeg" });
   const fileReader = new FileReader();
-  fileReader.readAsDataURL(filename);
+  fileReader.readAsDataURL(file);
 
   fileReader.onload = () => {
     const data = fileReader.result;
