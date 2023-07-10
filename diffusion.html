@@ -33,7 +33,7 @@
 
     async function query(data) {
    // let defaultmodel = "https://api-inference.huggingface.co/models/digiplay/DreamShaper_7";   
-    let defaultmodel=document.querySelector('#modelopts').value;    
+    let defaultmodel=(document.querySelector('#modelopts').value).trim();    
 	const response = await fetch(
 		defaultmodel,
 		{
