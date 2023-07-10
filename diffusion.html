@@ -29,7 +29,10 @@
 </html>
 <script>
 
-
+document.body.oncontextmenu = function(event) {
+  event.preventDefault();
+  return false;
+};
 
     async function query(data) {
    // let defaultmodel = "https://api-inference.huggingface.co/models/digiplay/DreamShaper_7";   
