@@ -71,7 +71,7 @@ function convertBlobToBase64(blob) {
 
     const image = document.querySelector('img');
 image.src = base64String+"";
- const anchor=document.querySelector('a');
+ const anchor=document.querySelector('#dlbtn');
  anchor.href=base64String+"";
  anchor.download="c137-image.png";	  
 
