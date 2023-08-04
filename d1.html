@@ -1,10 +1,3 @@
-
-To handle the case when an image fails to load, you can add an onerror event to the <img> element. This event will be triggered if the image fails to load, and you can then display a "Try Again" message or take any other appropriate action.
-
-Here's the updated code with the "Try Again" message:
-
-html
-Copy code
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +15,17 @@ Copy code
 </div>
 
 <textarea id="imageq" style="width:100%; height:50px;" placeholder='Type something to generate the background'></textarea>
+
+<div>
+  <label for="resolution">Resolution (width x height):</label>
+  <input type="text" id="resolution" placeholder="e.g., 1920x1080">
+</div>
+
+<div>
+  <label for="scaling">Scaling (between 0.1 to 2):</label>
+  <input type="number" id="scaling" step="0.1" min="0.1" max="2" value="1">
+</div>
+
 <button onclick="genimg_process()">Generate Image</button>
 <a id='dlbtn' style='text-decoration:none;'><button>Download Image</button></a>	
 	
@@ -72,7 +76,20 @@ function hideErrorMessage() {
 async function genimg_process() {
   speak("Initiating Artwork Sequence, Please wait");
   var q = document.querySelector('#imageq').value;
-  var defpromp = "masterpiece, best quality, (16:9), ";
+  var resolution = document.querySelector('#resolution').value.trim();
+  var scaling = parseFloat(document.querySelector('#scaling').value);
+  
+  if (!resolution.match(/^\d+x\d+$/)) {
+    alert("Invalid resolution format. Please use width x height format (e.g., 1920x1080).");
+    return;
+  }
+
+  if (scaling < 0.1 || scaling > 2) {
+    alert("Scaling value should be between 0.1 and 2.");
+    return;
+  }
+
+  var defpromp = `masterpiece, best quality, (${resolution}), `;
   hideErrorMessage();
   showLoader();
   try {
@@ -80,6 +97,7 @@ async function genimg_process() {
       "inputs": defpromp + q,
       "parameters": {
         "negative_prompt": 'blurry',
+        "scaling_factor": scaling,
       }
     });
     convertBlobToBase64(response);
